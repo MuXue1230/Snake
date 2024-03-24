@@ -28,7 +28,7 @@ bool Game::PreInitialize()
 	}
 	SDL_Log("Pre-drawing Screen...");
 	SDL_Log("> Setting Up Renderer...");
-	SDL_SetRenderDrawColor(this->mRenderer, 255, 255, 255, 255);
+	SDL_SetRenderDrawColor(this->mRenderer, 0, 0, 0, 255);
 	SDL_Log("> Cleaning Renderer...");
 	SDL_RenderClear(this->mRenderer);
 	SDL_Log("> Drawing Renderer...");
@@ -124,7 +124,7 @@ void Game::UpdateGame()
 
 void Game::GenerateOutput()
 {
-	SDL_SetRenderDrawColor(this->mRenderer, 255, 255, 255, 255);
+	SDL_SetRenderDrawColor(this->mRenderer, 0, 0, 0, 255);
 	SDL_RenderClear(this->mRenderer);
 	text_snake_ai.UpdateRenderer();
 	SDL_RenderPresent(this->mRenderer);

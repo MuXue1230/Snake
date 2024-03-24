@@ -23,9 +23,9 @@ GMoveableObject::GMoveableObject(std::string name)
 
 void GMoveableObject::UpdateObject()
 {
-	if (this->status.move.direction = Direction::D_NORTH) this->MoveUp();
-	else if (this->status.move.direction = Direction::D_SOUTH) this->MoveDown();
-	else if (this->status.move.direction = Direction::D_EAST) this->MoveRight();
-	else if (this->status.move.direction = Direction::D_WEST) this->MoveLeft();
+	if (this->GetStatus().move.direction == Direction::D_NORTH) this->MoveUp();
+	else if (this->GetStatus().move.direction == Direction::D_SOUTH) this->MoveDown();
+	else if (this->GetStatus().move.direction == Direction::D_EAST) this->MoveRight();
+	else if (this->GetStatus().move.direction == Direction::D_WEST) this->MoveLeft();
 	this->UpdateObjectExernal();
 }

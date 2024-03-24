@@ -34,22 +34,24 @@ void GMOSnake::Initialize()
 
 void GMOSnake::UpdateRenderer()
 {
-	snakeHead.w = status.size.w;
-	snakeHead.h = status.size.h;
-	snakeHead.x = status.pos.x;
-	snakeHead.y = status.pos.y;
-	SDL_SetRenderDrawColor(this->GetRenderer(), status.color.R, status.color.G, status.color.B, status.color.A);
+	snakeHead.w = this->status.size.w;
+	snakeHead.h = this->status.size.h;
+	snakeHead.x = this->status.pos.x;
+	snakeHead.y = this->status.pos.y;
+	SDL_SetRenderDrawColor(this->GetRenderer(), this->status.color.R, this->status.color.G, this->status.color.B, this->status.color.A);
 	SDL_RenderFillRect(this->GetRenderer(), &snakeHead);
 
-	SDL_SetRenderDrawColor(this->GetRenderer(), status.body.color.R, status.body.color.G, status.body.color.B, status.body.color.A);
-	for (size_t i = 0; i < status.body.turnPoints.size(); ++i)
+	SDL_SetRenderDrawColor(this->GetRenderer(), this->status.body.color.R, this->status.body.color.G, this->status.body.color.B, this->status.body.color.A);
+	for (size_t i = 0; i < this->status.body.turnPoints.size(); ++i)
 	{
 		SDL_Rect bodyPart;
-		bodyPart.w = status.size.w;
-		bodyPart.h = status.size.h;
-		bodyPart.x = status.body.turnPoints[i].pos.x * status.size.w;
-		bodyPart.y = status.body.turnPoints[i].pos.y * status.size.h;
+		bodyPart.w = this->status.size.w;
+		bodyPart.h = this->status.size.h;
+		bodyPart.x = this->status.body.turnPoints[i].pos.x;
+		bodyPart.y = this->status.body.turnPoints[i].pos.y;
 
 		SDL_RenderFillRect(this->GetRenderer(), &bodyPart);
 	}
+	SDL_Log("Update x:%d y:%d", snakeHead.x, snakeHead.y);
+	SDL_Delay(100);
 }
