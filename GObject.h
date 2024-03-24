@@ -39,21 +39,22 @@ public:
 	void UpdateBehaviors();
 	void HandleBehaviorsEvent(SDL_Event event);
 
-	virtual void Initialize();
-	virtual void UpdateObject();
-	virtual void HandleEvent(SDL_Event event);
-	virtual void UpdateRenderer();
+	virtual void Initialize() {}
+	virtual void UpdateObject() {}
+	virtual void HandleEvent(SDL_Event event) {}
+	virtual void UpdateRenderer() {}
 
 	// Getter & Setter
 	std::string GetName() const { return this->name; }
 	GObjectStatus GetStatus() const { return this->status; }
+	SDL_Renderer* GetRenderer() const { return this->renderer; }
 	void SetName(std::string name)
 	{
 		this->name = name;
 	}
 	void SetColor(unsigned short R, unsigned short G, unsigned short B, unsigned short A) 
 	{ 
-		if (R >225 || G > 225 || B > 225 || A > 225) throw ColorError();
+		if (R > 0x00ff || G > 0x00ff || B > 0x00ff || A > 0x00ff) throw ColorError();
 		this->status.color = { R, G, B, A };
 	}
 	void SetSize(unsigned int w, unsigned int h)

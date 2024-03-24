@@ -52,19 +52,3 @@ void GObject::HandleBehaviorsEvent(SDL_Event event)
 	}
 	this->HandleEvent(event);
 }
-
-void GObject::Initialize()
-{
-}
-
-void GObject::UpdateObject()
-{
-}
-
-void GObject::HandleEvent(SDL_Event event)
-{
-}
-
-void GObject::UpdateRenderer()
-{
-}

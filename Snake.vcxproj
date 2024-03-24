@@ -72,17 +72,18 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <SuppressStartupBanner>false</SuppressStartupBanner>
       <FloatingPointExceptions>true</FloatingPointExceptions>
-      <CreateHotpatchableImage>false</CreateHotpatchableImage>
+      <CreateHotpatchableImage>true</CreateHotpatchableImage>
       <CompileAs>CompileAsCpp</CompileAs>
       <ShowIncludes>true</ShowIncludes>
-      <Optimization>MaxSpeed</Optimization>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <Optimization>Disabled</Optimization>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <ShowProgress>LinkVerbose</ShowProgress>
       <SuppressStartupBanner>false</SuppressStartupBanner>
       <LinkStatus>true</LinkStatus>
@@ -152,6 +153,8 @@
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GBehavior.cpp" />
+    <ClCompile Include="GBSnakeMove.cpp" />
+    <ClCompile Include="GMOSnake.cpp" />
     <ClCompile Include="GMoveableObject.cpp" />
     <ClCompile Include="GObject.cpp" />
     <ClCompile Include="GPlayerObject.cpp" />
@@ -160,6 +163,8 @@
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="GBehavior.h" />
+    <ClInclude Include="GBSnakeMove.h" />
+    <ClInclude Include="GMOSnake.h" />
     <ClInclude Include="GMoveableObject.h" />
     <ClInclude Include="GObject.h" />
     <ClInclude Include="GPlayerObject.h" />

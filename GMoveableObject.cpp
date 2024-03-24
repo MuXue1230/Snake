@@ -20,3 +20,12 @@ GMoveableObject::GMoveableObject(std::string name)
 	};
 	this->SetName(name);
 }
+
+void GMoveableObject::UpdateObject()
+{
+	if (this->status.move.direction = Direction::D_NORTH) this->MoveUp();
+	else if (this->status.move.direction = Direction::D_SOUTH) this->MoveDown();
+	else if (this->status.move.direction = Direction::D_EAST) this->MoveRight();
+	else if (this->status.move.direction = Direction::D_WEST) this->MoveLeft();
+	this->UpdateObjectExernal();
+}

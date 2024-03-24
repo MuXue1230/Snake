@@ -22,6 +22,15 @@
     <Filter Include="头文件\Snake">
       <UniqueIdentifier>{7c72f18b-19c4-4fc4-ac29-0825f676c50b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\Snake">
+      <UniqueIdentifier>{a37a6804-96b6-466a-92e8-012ff01fa650}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Snake\Behaviors">
+      <UniqueIdentifier>{0bb452a2-9e1f-4b06-978f-4b45532e4c4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Snake\Behaviors">
+      <UniqueIdentifier>{acd48bd8-071b-4c9a-aa58-2283192d3736}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Snake.cpp">
@@ -42,6 +51,12 @@
     <ClCompile Include="GPlayerObject.cpp">
       <Filter>源文件\Basic</Filter>
     </ClCompile>
+    <ClCompile Include="GMOSnake.cpp">
+      <Filter>源文件\Snake</Filter>
+    </ClCompile>
+    <ClCompile Include="GBSnakeMove.cpp">
+      <Filter>源文件\Snake\Behaviors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sdl_include.h">
@@ -61,6 +76,12 @@
     </ClInclude>
     <ClInclude Include="GBehavior.h">
       <Filter>头文件\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="GMOSnake.h">
+      <Filter>头文件\Snake</Filter>
+    </ClInclude>
+    <ClInclude Include="GBSnakeMove.h">
+      <Filter>头文件\Snake\Behaviors</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

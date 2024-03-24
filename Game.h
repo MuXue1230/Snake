@@ -1,6 +1,7 @@
 #pragma once
 #include "sdl_include.h"
 #include "GObject.h"
+#include "GMOSnake.h"
 
 class Game
 {
@@ -37,6 +38,6 @@ private:
 
 	bool mIsRunning;
 
-	std::vector<std::shared_ptr<GObject>> mObjects;
+	GMOSnake text_snake_ai;
 };
 

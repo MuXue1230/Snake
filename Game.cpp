@@ -35,17 +35,12 @@ bool Game::PreInitialize()
 	SDL_RenderPresent(this->mRenderer);
 
 	SDL_Log("Updating Objects List...");
-	SDL_Log("> Creating Object <\"Test 1\">...");
-	//std::shared_ptr<GObject> obj_1 = std::make_shared<GObject>(GObject("Test 1"));
-	//obj_1->AddBehaviors(*new GBehavior<GObject>("Test 1-1"));
-	//obj_1->AddBehaviors(*new GBehavior<GObject>("Test 1-2"));
-	//this->mObjects.push_back(obj_1);
+	SDL_Log("> Creating Object <Snake<AI_Test1>>...");
+	text_snake_ai = GMOSnake("AI_Test1");
 
 	SDL_Log("Pre-initialize Objects...");
-	for (auto& item : this->mObjects) {
-		SDL_Log("> Pre-initialize Object <%s>...", item->GetName().c_str());
-		item->PreInitialize(this->mRenderer);
-	}
+	SDL_Log("> Pre-initialize Object <%s>...", text_snake_ai.GetName().c_str());
+	text_snake_ai.PreInitialize(this->mRenderer);
 	return true;
 }
 
@@ -75,10 +70,8 @@ bool Game::Initialize()
 	Mix_Volume(-1, 64);
 	Mix_VolumeMusic(32);
 	SDL_Log("Initialize Objects...");
-	for (auto& item : this->mObjects) {
-		SDL_Log("> Initialize Object <%s>...", item->GetName().c_str());
-		item->InitializeBehaviors();
-	}
+	SDL_Log("> Initialize Object <%s>...", text_snake_ai.GetName().c_str());
+	text_snake_ai.InitializeBehaviors();
 	return true;
 }
 
@@ -120,24 +113,19 @@ void Game::ProcessesInput()
 			this->mIsRunning = false;
 			break;
 		}
-		for (auto& item : this->mObjects) {
-			item->HandleBehaviorsEvent(event);
-		}
+		text_snake_ai.HandleBehaviorsEvent(event);
 	}
 }
 
 void Game::UpdateGame()
 {
-	for (auto& item : this->mObjects) {
-		item->UpdateBehaviors();
-	}
+	text_snake_ai.UpdateBehaviors();
 }
 
 void Game::GenerateOutput()
 {
+	SDL_SetRenderDrawColor(this->mRenderer, 255, 255, 255, 255);
 	SDL_RenderClear(this->mRenderer);
+	text_snake_ai.UpdateRenderer();
 	SDL_RenderPresent(this->mRenderer);
-	for (auto& item : this->mObjects) {
-		item->UpdateRenderer();
-	}
 }
