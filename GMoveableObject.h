@@ -57,6 +57,12 @@ public:
 	GMoveableObjectStatus GetStatus() const { return this->status; }
 	void SetSpeed(unsigned int speed) { this->status.move.speed = speed; }
 	void SetDirection(Direction direction) { this->status.move.direction = direction; }
+
+	// Handle Behaviors
+	void AddBehaviors(GBehavior<GMoveableObject> behavior)
+	{
+		this->behaviors.push_back(std::make_shared<GBehavior<GMoveableObject>>(behavior));
+	}
 private:
 	GMoveableObjectStatus status;
 	std::vector<std::shared_ptr<GBehavior<GMoveableObject>>> behaviors;

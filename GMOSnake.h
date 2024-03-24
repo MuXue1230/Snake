@@ -1,5 +1,6 @@
 #pragma once
 #include "GMoveableObject.h"
+#include "GBSnakeMove.h"
 
 struct TurnPoint
 {
@@ -77,6 +78,7 @@ public:
 	}
 	void SetBodyLength(unsigned int length) { this->status.body.length = length; }
 	void SetSpeed(unsigned int speed) { this->status.move.speed = speed; }
+	void SetLength(unsigned int length) { this->status.body.length = length; }
 	void SetDirection(Direction direction) { this->status.move.direction = direction; }
 	void SetColor(unsigned short R, unsigned short G, unsigned short B, unsigned short A)
 	{
@@ -97,8 +99,15 @@ public:
 		status.body.turnPoints.erase(status.body.turnPoints.begin());
 		return temp;
 	}
+
+	// Handle Behaviors
+	void AddBehaviors(GBehavior<GMOSnake> behavior)
+	{
+		this->behaviors.push_back(std::make_shared<GBehavior<GMOSnake>>(behavior));
+	}
 private:
 	GMOSnakeStatus status;
+	std::vector<std::shared_ptr<GBehavior<GMOSnake>>> behaviors;
 	SDL_Rect snakeHead;
 	std::vector<SDL_Rect> snakeBodies;
 };
