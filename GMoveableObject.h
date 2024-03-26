@@ -59,9 +59,9 @@ public:
 	void SetDirection(Direction direction) { this->status.move.direction = direction; }
 
 	// Handle Behaviors
-	void AddBehaviors(GBehavior<GMoveableObject> behavior)
+	void AddBehaviors(std::shared_ptr<GBehavior<GMoveableObject>> behavior)
 	{
-		this->behaviors.push_back(std::make_shared<GBehavior<GMoveableObject>>(behavior));
+		this->behaviors.push_back(behavior);
 	}
 private:
 	GMoveableObjectStatus status;

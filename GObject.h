@@ -68,9 +68,9 @@ public:
 	void SetRenderer(SDL_Renderer* renderer) { this->renderer = renderer; }
 
 	// Handle Behaviors
-	void AddBehaviors(GBehavior<GObject> behavior) 
+	void AddBehaviors(std::shared_ptr<GBehavior<GObject>> behavior)
 	{
-		this->behaviors.push_back(std::make_shared<GBehavior<GObject>>(behavior));
+		this->behaviors.push_back(behavior);
 	}
 private:
 	std::string name;

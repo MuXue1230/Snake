@@ -37,7 +37,7 @@ bool Game::PreInitialize()
 	SDL_Log("Updating Objects List...");
 	SDL_Log("> Creating Object <Snake<AI_Test1>>...");
 	test_snake_ai = GMOSnake("AI_Test1");
-	test_snake_ai.AddBehaviors(GBSnakeMove<GMOSnake>("BasicMove"));
+	test_snake_ai.AddBehaviors(std::make_shared<GBSnakeMove<GMOSnake>>(GBSnakeMove<GMOSnake>("BasicMove")));
 
 	SDL_Log("Pre-initialize Objects...");
 	SDL_Log("> Pre-initialize Object <%s>...", test_snake_ai.GetName().c_str());

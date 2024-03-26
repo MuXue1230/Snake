@@ -107,9 +107,9 @@ public:
 	}
 
 	// Handle Behaviors
-	void AddBehaviors(GBehavior<GMOSnake> behavior)
+	void AddBehaviors(std::shared_ptr<GBehavior<GMOSnake>> behavior)
 	{
-		this->behaviors.push_back(std::make_shared<GBehavior<GMOSnake>>(behavior));
+		this->behaviors.push_back(behavior);
 	}
 private:
 	GMOSnakeStatus status;
