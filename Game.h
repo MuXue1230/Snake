@@ -38,6 +38,6 @@ private:
 
 	bool mIsRunning;
 
-	GMOSnake text_snake_ai;
+	GMOSnake test_snake_ai;
 };
 

@@ -48,6 +48,7 @@ public:
 	std::string GetName() const { return this->name; }
 	GObjectStatus GetStatus() const { return this->status; }
 	SDL_Renderer* GetRenderer() const { return this->renderer; }
+	std::vector<std::shared_ptr<GBehavior<GObject>>> GetBehaviors() const { return this->behaviors; }
 	void SetName(std::string name)
 	{
 		this->name = name;
@@ -64,6 +65,7 @@ public:
 	void SetPos(int x, int y) {
 		this->status.pos = { x, y };
 	}
+	void SetRenderer(SDL_Renderer* renderer) { this->renderer = renderer; }
 
 	// Handle Behaviors
 	void AddBehaviors(GBehavior<GObject> behavior) 

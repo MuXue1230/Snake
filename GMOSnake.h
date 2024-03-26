@@ -58,6 +58,11 @@ public:
     GMOSnake();
     GMOSnake(std::string name);
 
+	void PreInitialize(SDL_Renderer* renderer);
+	void InitializeBehaviors();
+	void UpdateBehaviors();
+	void HandleBehaviorsEvent(SDL_Event event);
+
 	void Initialize() override;
 	// void UpdateObjectExernal() override; // Leave it to Behaviors.
 	// void HandleEvent(SDL_Event event) override; // Leave it to Behaviors.
@@ -71,6 +76,7 @@ public:
 
 	// Getter & Setter
 	GMOSnakeStatus GetStatus() const { return this->status; }
+	std::vector<std::shared_ptr<GBehavior<GMOSnake>>> GetBehaviors() const { return this->behaviors; }
 	void SetBodyColor(unsigned short R, unsigned short G, unsigned short B, unsigned short A)
 	{
 		if (R > 0x00ff || G > 0x00ff || B > 0x00ff || A > 0x00ff) throw ColorError();

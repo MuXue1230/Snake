@@ -10,8 +10,6 @@ GMOSnake::GMOSnake()
 	this->SetSpeed(0);
 	this->SetLength(0);
 	this->SetName("Snake");
-
-	this->AddBehaviors(GBSnakeMove<GMOSnake>("BasicMove"));
 }
 
 GMOSnake::GMOSnake(std::string name)
@@ -24,6 +22,40 @@ GMOSnake::GMOSnake(std::string name)
 	this->SetSpeed(0);
 	this->SetLength(0);
 	this->SetName("Snake<"+name+">");
+}
+
+void GMOSnake::PreInitialize(SDL_Renderer* renderer)
+{
+	this->SetRenderer(renderer);
+	for (auto& item : this->GetBehaviors()) {
+		SDL_Log("> > Pre-initialize Behavior <%s>...", item->GetName().c_str());
+		item->PreInitialize(*this, renderer);
+	}
+}
+
+void GMOSnake::InitializeBehaviors()
+{
+	for (auto& item : this->GetBehaviors()) {
+		SDL_Log("> > Initialize Behavior <%s>...", item->GetName().c_str());
+		item->Initialize();
+	}
+	this->Initialize();
+}
+
+void GMOSnake::UpdateBehaviors()
+{
+	for (auto& item : this->GetBehaviors()) {
+		item->UpdateObject();
+	}
+	this->UpdateObject();
+}
+
+void GMOSnake::HandleBehaviorsEvent(SDL_Event event)
+{
+	for (auto& item : this->GetBehaviors()) {
+		item->HandleEvent(event);
+	}
+	this->HandleEvent(event);
 }
 
 void GMOSnake::Initialize()
