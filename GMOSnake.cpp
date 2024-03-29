@@ -28,7 +28,7 @@ void GMOSnake::PreInitialize(SDL_Renderer* renderer)
 {
 	this->SetRenderer(renderer);
 	for (auto& item : this->GetBehaviors()) {
-		SDL_Log("> > Pre-initialize Behavior <%s>...", item->GetName().c_str());
+		SDL_Log("> > Pre-initializing Behavior <%s>...", item->GetName().c_str());
 		item->PreInitialize(*this, renderer);
 	}
 }
@@ -36,7 +36,7 @@ void GMOSnake::PreInitialize(SDL_Renderer* renderer)
 void GMOSnake::InitializeBehaviors()
 {
 	for (auto& item : this->GetBehaviors()) {
-		SDL_Log("> > Initialize Behavior <%s>...", item->GetName().c_str());
+		SDL_Log("> > Initializing Behavior <%s>...", item->GetName().c_str());
 		item->Initialize();
 	}
 	this->Initialize();
@@ -69,6 +69,15 @@ void GMOSnake::Initialize()
 	this->SetSpeed(5);
 }
 
+void GMOSnake::UpdateObject()
+{
+	if (this->GetStatus().move.direction == Direction::D_NORTH) this->MoveUp();
+	else if (this->GetStatus().move.direction == Direction::D_SOUTH) this->MoveDown();
+	else if (this->GetStatus().move.direction == Direction::D_EAST) this->MoveRight();
+	else if (this->GetStatus().move.direction == Direction::D_WEST) this->MoveLeft();
+	this->UpdateObjectExernal();
+}
+
 void GMOSnake::UpdateRenderer()
 {
 	snakeHead.w = this->status.size.w;
@@ -79,29 +88,32 @@ void GMOSnake::UpdateRenderer()
 	SDL_RenderFillRect(this->GetRenderer(), &snakeHead);
 
 	SDL_SetRenderDrawColor(this->GetRenderer(), this->status.body.color.R, this->status.body.color.G, this->status.body.color.B, this->status.body.color.A);
-	TurnPoint point = { this->status.pos.x, this->status.pos.y, this->status.move.direction, this->status.move.direction };
+	TurnPoint point;
+	point.pos.x = this->status.pos.x;
+	point.pos.y = this->status.pos.y;
+	point.from = this->status.move.direction;
 	int index = 1;
-	for (size_t i = 0; i < this->status.body.length; ++i)
-	{
+    size_t t = 0;
+	for (size_t i = 0; i < this->status.body.length; ++i) {
 		SDL_Rect bodyPart;
 		bodyPart.w = this->status.size.w;
 		bodyPart.h = this->status.size.h;
 		switch (point.from)
 		{
-		case D_NORTH:
-			bodyPart.x = point.pos.x;
-			bodyPart.y = point.pos.y - i * this->status.size.h;
-			break;
 		case D_SOUTH:
 			bodyPart.x = point.pos.x;
-			bodyPart.y = point.pos.y + (i + 1)*this->status.size.h;
+			bodyPart.y = point.pos.y - t * this->status.size.h;
 			break;
-		case D_WEST:
-			bodyPart.x = point.pos.x - i * this->status.size.w;
-			bodyPart.y = point.pos.y;
+		case D_NORTH:
+			bodyPart.x = point.pos.x;
+			bodyPart.y = point.pos.y + t*this->status.size.h;
 			break;
 		case D_EAST:
-			bodyPart.x = point.pos.x + (i + 1)*this->status.size.w;
+			bodyPart.x = point.pos.x - t * this->status.size.w;
+			bodyPart.y = point.pos.y;
+			break;
+		case D_WEST:
+			bodyPart.x = point.pos.x + t*this->status.size.w;
 			bodyPart.y = point.pos.y;
 			break;
 		}
@@ -109,9 +121,19 @@ void GMOSnake::UpdateRenderer()
 			if (this->status.body.turnPoints[this->status.body.turnPoints.size() - index].pos.x == bodyPart.x && this->status.body.turnPoints[this->status.body.turnPoints.size() - index].pos.y == bodyPart.y) {
 				point = this->status.body.turnPoints[this->status.body.turnPoints.size() - index];
 				index += 1;
+                t = 0;
 			}
 		}
 
+        t++;
+
 		SDL_RenderFillRect(this->GetRenderer(), &bodyPart);
 	}
+
+    for (size_t i = 0; i < this->status.body.turnPoints.size(); ++i) {
+        this->status.body.turnPoints[i].runLength += 1;
+    }
+    if (this->status.body.turnPoints.size() > 0 && this->status.body.turnPoints[0].runLength >= this->status.body.length) {
+        this->DeleteLastTurnPoint();
+    }
 }

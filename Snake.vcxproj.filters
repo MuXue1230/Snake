@@ -54,7 +54,13 @@
     <ClCompile Include="GMOSnake.cpp">
       <Filter>源文件\Snake</Filter>
     </ClCompile>
-    <ClCompile Include="GBSnakeMove.cpp">
+    <ClCompile Include="GBSnakeMoveBasicExample.cpp">
+      <Filter>源文件\Snake\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="GOFood.cpp">
+      <Filter>源文件\Snake</Filter>
+    </ClCompile>
+    <ClCompile Include="GBSnakeMoveUserControl.cpp">
       <Filter>源文件\Snake\Behaviors</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,7 +86,13 @@
     <ClInclude Include="GMOSnake.h">
       <Filter>头文件\Snake</Filter>
     </ClInclude>
-    <ClInclude Include="GBSnakeMove.h">
+    <ClInclude Include="GBSnakeMoveBasicExample.h">
+      <Filter>头文件\Snake\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="GOFood.h">
+      <Filter>头文件\Snake</Filter>
+    </ClInclude>
+    <ClInclude Include="GBSnakeMoveUserControl.h">
       <Filter>头文件\Snake\Behaviors</Filter>
     </ClInclude>
   </ItemGroup>

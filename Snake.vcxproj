@@ -20,7 +20,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
+    <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -64,9 +64,9 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
@@ -88,8 +88,7 @@
       <ShowProgress>LinkVerbose</ShowProgress>
       <SuppressStartupBanner>false</SuppressStartupBanner>
       <LinkStatus>true</LinkStatus>
-      <CreateHotPatchableImage>
-      </CreateHotPatchableImage>
+      <CreateHotPatchableImage>Enabled</CreateHotPatchableImage>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
@@ -155,20 +154,24 @@
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GBehavior.cpp" />
-    <ClCompile Include="GBSnakeMove.cpp" />
+    <ClCompile Include="GBSnakeMoveBasicExample.cpp" />
+    <ClCompile Include="GBSnakeMoveUserControl.cpp" />
     <ClCompile Include="GMOSnake.cpp" />
     <ClCompile Include="GMoveableObject.cpp" />
     <ClCompile Include="GObject.cpp" />
+    <ClCompile Include="GOFood.cpp" />
     <ClCompile Include="GPlayerObject.cpp" />
     <ClCompile Include="Snake.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="GBehavior.h" />
-    <ClInclude Include="GBSnakeMove.h" />
+    <ClInclude Include="GBSnakeMoveBasicExample.h" />
+    <ClInclude Include="GBSnakeMoveUserControl.h" />
     <ClInclude Include="GMOSnake.h" />
     <ClInclude Include="GMoveableObject.h" />
     <ClInclude Include="GObject.h" />
+    <ClInclude Include="GOFood.h" />
     <ClInclude Include="GPlayerObject.h" />
     <ClInclude Include="sdl_include.h" />
   </ItemGroup>

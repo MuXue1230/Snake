@@ -20,13 +20,13 @@ public:
 	// Getter & Setter
 	std::string GetName() const { return this->name; }
 	SDL_Renderer* GetRenderer() const { return this->renderer; }
-	T GetObject() const { return this->obj; }
+	T* GetObject() const { return this->obj; }
 	void SetName(std::string name)
 	{
 		this->name = name;
 	}
 private:
-	T obj;
+	T* obj;
 	std::string name;
 	SDL_Renderer* renderer;
 };
@@ -34,6 +34,6 @@ private:
 template<class T>
 inline void GBehavior<T>::PreInitialize(T& obj, SDL_Renderer* renderer)
 {
-	this->obj = obj;
+	this->obj = &obj;
 	this->renderer = renderer;
 }

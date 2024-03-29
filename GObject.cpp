@@ -23,7 +23,7 @@ void GObject::PreInitialize(SDL_Renderer* renderer)
 {
 	this->renderer = renderer;
 	for (auto& item : this->GetBehaviors()) {
-		SDL_Log("> > Pre-initialize Behavior <%s>...", item->GetName().c_str());
+		SDL_Log("> > Pre-initializing Behavior <%s>...", item->GetName().c_str());
 		item->PreInitialize(*this, renderer);
 	}
 }
@@ -31,7 +31,7 @@ void GObject::PreInitialize(SDL_Renderer* renderer)
 void GObject::InitializeBehaviors()
 {
 	for (auto& item : this->GetBehaviors()) {
-		SDL_Log("> > Initialize Behavior <%s>...", item->GetName().c_str());
+		SDL_Log("> > Initializing Behavior <%s>...", item->GetName().c_str());
 		item->Initialize();
 	}
 	this->Initialize();

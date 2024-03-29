@@ -13,7 +13,7 @@ public:
 	- Initialize the video component
 	- Create window and renderer
 	- Update Objects in the list
-	- Pre-initialize all Objects in the list.
+	- Pre-initializing all Objects in the list.
 	*/
 	bool PreInitialize();
 	/*

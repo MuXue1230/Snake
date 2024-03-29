@@ -7,7 +7,7 @@ Game::Game()
 bool Game::PreInitialize()
 {
 	// 
-	SDL_Log("Pre-initialize Game...");
+	SDL_Log("Pre-initializing Game...");
 	SDL_Log("> Initializing SDL...");
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) {
 		SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_ERROR, SDL_GetError());
@@ -37,17 +37,18 @@ bool Game::PreInitialize()
 	SDL_Log("Updating Objects List...");
 	SDL_Log("> Creating Object <Snake<AI_Test1>>...");
 	test_snake_ai = GMOSnake("AI_Test1");
-	test_snake_ai.AddBehaviors(std::make_shared<GBSnakeMove<GMOSnake>>(GBSnakeMove<GMOSnake>("BasicMove")));
+    test_snake_ai.AddBehaviors(std::make_shared<GBSnakeMoveBasicExample<GMOSnake>>(GBSnakeMoveBasicExample<GMOSnake>("BasicMove")));
+	test_snake_ai.AddBehaviors(std::make_shared<GBSnakeMoveUserControl<GMOSnake>>(GBSnakeMoveUserControl<GMOSnake>("TextMove")));
 
-	SDL_Log("Pre-initialize Objects...");
-	SDL_Log("> Pre-initialize Object <%s>...", test_snake_ai.GetName().c_str());
+	SDL_Log("Pre-initializing Objects...");
+	SDL_Log("> Pre-initializing Object <%s>...", test_snake_ai.GetName().c_str());
 	test_snake_ai.PreInitialize(this->mRenderer);
 	return true;
 }
 
 bool Game::Initialize()
 {
-	SDL_Log("Initialize Game...");
+	SDL_Log("Initializing Game...");
 	SDL_Log("> Initializing SDL_image...");
 	if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
 		SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_ERROR, IMG_GetError());
@@ -70,8 +71,8 @@ bool Game::Initialize()
 	SDL_Log("> Setting Up SDL_mixer...");
 	Mix_Volume(-1, 64);
 	Mix_VolumeMusic(32);
-	SDL_Log("Initialize Objects...");
-	SDL_Log("> Initialize Object <%s>...", test_snake_ai.GetName().c_str());
+	SDL_Log("Initializing Objects...");
+	SDL_Log("> Initializing Object <%s>...", test_snake_ai.GetName().c_str());
 	test_snake_ai.InitializeBehaviors();
 	return true;
 }

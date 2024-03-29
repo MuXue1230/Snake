@@ -1,6 +1,7 @@
 #pragma once
 #include "GMoveableObject.h"
-#include "GBSnakeMove.h"
+#include "GBSnakeMoveBasicExample.h"
+#include "GBSnakeMoveUserControl.h"
 
 struct TurnPoint
 {
@@ -11,7 +12,7 @@ struct TurnPoint
 	};
 	Postion pos;
 	Direction from;
-	Direction to;
+	unsigned int runLength;
 };
 
 struct GMOSnakeStatus
@@ -64,13 +65,14 @@ public:
 	void HandleBehaviorsEvent(SDL_Event event);
 
 	void Initialize() override;
+	void UpdateObject() override;
 	// void UpdateObjectExernal() override; // Leave it to Behaviors.
 	// void HandleEvent(SDL_Event event) override; // Leave it to Behaviors.
 	void UpdateRenderer() override;
 
 
-	void MoveUp() override { this->status.pos.y += this->status.move.speed; }
-	void MoveDown() override { this->status.pos.y -= this->status.move.speed; }
+	void MoveUp() override { this->status.pos.y -= this->status.move.speed; }
+	void MoveDown() override { this->status.pos.y += this->status.move.speed; }
 	void MoveLeft() override { this->status.pos.x -= this->status.move.speed; }
 	void MoveRight() override { this->status.pos.x += this->status.move.speed; }
 
@@ -98,7 +100,15 @@ public:
 	void SetPos(int x, int y) {
 		this->status.pos = { x, y };
 	}
-	void AddBodyTurnPoint(TurnPoint point) { this->status.body.turnPoints.push_back(point); }
+	void AddBodyTurnPoint()
+	{
+		TurnPoint turnPoint;
+		turnPoint.pos.x = this->status.pos.x;
+		turnPoint.pos.y = this->status.pos.y;
+		turnPoint.from = this->status.move.direction;
+		turnPoint.runLength = 0;
+		this->status.body.turnPoints.push_back(turnPoint);
+	}
 	TurnPoint DeleteLastTurnPoint()
 	{ 
 		TurnPoint temp = this->status.body.turnPoints[0];
