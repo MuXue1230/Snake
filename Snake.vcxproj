@@ -154,6 +154,8 @@
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GBehavior.cpp" />
+    <ClCompile Include="GBSnakeCheckDeath.cpp" />
+    <ClCompile Include="GBSnakeCheckFood.cpp" />
     <ClCompile Include="GBSnakeMoveBasicExample.cpp" />
     <ClCompile Include="GBSnakeMoveUserControl.cpp" />
     <ClCompile Include="GMOSnake.cpp" />
@@ -166,6 +168,8 @@
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="GBehavior.h" />
+    <ClInclude Include="GBSnakeCheckDeath.h" />
+    <ClInclude Include="GBSnakeCheckFood.h" />
     <ClInclude Include="GBSnakeMoveBasicExample.h" />
     <ClInclude Include="GBSnakeMoveUserControl.h" />
     <ClInclude Include="GMOSnake.h" />

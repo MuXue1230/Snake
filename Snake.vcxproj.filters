@@ -63,6 +63,12 @@
     <ClCompile Include="GBSnakeMoveUserControl.cpp">
       <Filter>源文件\Snake\Behaviors</Filter>
     </ClCompile>
+    <ClCompile Include="GBSnakeCheckDeath.cpp">
+      <Filter>源文件\Snake\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="GBSnakeCheckFood.cpp">
+      <Filter>源文件\Snake\Behaviors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sdl_include.h">
@@ -93,6 +99,12 @@
       <Filter>头文件\Snake</Filter>
     </ClInclude>
     <ClInclude Include="GBSnakeMoveUserControl.h">
+      <Filter>头文件\Snake\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="GBSnakeCheckDeath.h">
+      <Filter>头文件\Snake\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="GBSnakeCheckFood.h">
       <Filter>头文件\Snake\Behaviors</Filter>
     </ClInclude>
   </ItemGroup>

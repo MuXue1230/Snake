@@ -48,36 +48,29 @@ inline void GBSnakeMoveUserControl<T>::HandleEvent(SDL_Event& event)
     if (event.type == SDL_KEYDOWN) {
         if (event.key.keysym.sym == 'x') {
             this->userMove = !this->userMove;
+            SDL_Log("[%s->%s] User control turned into: %s.", this->GetObject()->GetName().c_str(), this->GetName().c_str(), this->userMove ?"on":"off");
         }
         if (this->userMove) {
-            switch (event.key.keysym.sym)
-            {
-            case('w'):
-                if (this->GetObject()->GetStatus().move.direction != Direction::D_SOUTH) {
-                    this->GetObject()->AddBodyTurnPoint();
-                    this->GetObject()->SetDirection(Direction::D_NORTH);
-                }
-                break;
-            case('s'):
-                if (this->GetObject()->GetStatus().move.direction != Direction::D_NORTH) {
-                    this->GetObject()->AddBodyTurnPoint();
-                    this->GetObject()->SetDirection(Direction::D_SOUTH);
-                }
-                break;
-            case('a'):
-                if (this->GetObject()->GetStatus().move.direction != Direction::D_EAST) {
-                    this->GetObject()->AddBodyTurnPoint();
-                    this->GetObject()->SetDirection(Direction::D_WEST);
-                }
-                break;
-            case('d'):
-                if (this->GetObject()->GetStatus().move.direction != Direction::D_WEST) {
-                    this->GetObject()->AddBodyTurnPoint();
-                    this->GetObject()->SetDirection(Direction::D_EAST);
-                }
-                break;
-            default:
-                break;
+            char key = event.key.keysym.sym;
+            if (key == 'w' && this->GetObject()->GetStatus().move.direction != Direction::D_SOUTH && \
+                !(this->GetObject()->GetStatus().pos.y == 0)) {
+                this->GetObject()->AddBodyTurnPoint();
+                this->GetObject()->SetDirection(Direction::D_NORTH);
+            }
+            else if (key == 's' && this->GetObject()->GetStatus().move.direction != Direction::D_NORTH && \
+                !(this->GetObject()->GetStatus().pos.y == 715)) {
+                this->GetObject()->AddBodyTurnPoint();
+                this->GetObject()->SetDirection(Direction::D_SOUTH);
+            }
+            else if (key == 'a' && this->GetObject()->GetStatus().move.direction != Direction::D_EAST && \
+                !(this->GetObject()->GetStatus().pos.x == 0)) {
+                this->GetObject()->AddBodyTurnPoint();
+                this->GetObject()->SetDirection(Direction::D_WEST);
+            }
+            else if (key == 'd' && this->GetObject()->GetStatus().move.direction != Direction::D_WEST && \
+                !(this->GetObject()->GetStatus().pos.x == 1075)) {
+                this->GetObject()->AddBodyTurnPoint();
+                this->GetObject()->SetDirection(Direction::D_EAST);
             }
         }
     }

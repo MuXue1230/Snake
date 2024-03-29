@@ -2,6 +2,13 @@
 #include "sdl_include.h"
 #include "GObject.h"
 #include "GMOSnake.h"
+#include "GOFood.h"
+
+#include "GBSnakeCheckDeath.h"
+#include "GBSnakeCheckFood.h"
+#include "GBSnakeMoveBasicExample.h"
+#include "GBSnakeMoveUserControl.h"
+
 
 class Game
 {
@@ -38,6 +45,11 @@ private:
 
 	bool mIsRunning;
 
+    const int gridWidth = 216;
+    const int gridHeight = 144;
+    bool occupied[216][144];
+
 	GMOSnake test_snake_ai;
+    std::vector<GOFood> foods;
 };
 

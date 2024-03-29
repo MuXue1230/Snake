@@ -38,11 +38,34 @@ bool Game::PreInitialize()
 	SDL_Log("> Creating Object <Snake<AI_Test1>>...");
 	test_snake_ai = GMOSnake("AI_Test1");
     test_snake_ai.AddBehaviors(std::make_shared<GBSnakeMoveBasicExample<GMOSnake>>(GBSnakeMoveBasicExample<GMOSnake>("BasicMove")));
-	test_snake_ai.AddBehaviors(std::make_shared<GBSnakeMoveUserControl<GMOSnake>>(GBSnakeMoveUserControl<GMOSnake>("TextMove")));
+    test_snake_ai.AddBehaviors(std::make_shared<GBSnakeMoveUserControl<GMOSnake>>(GBSnakeMoveUserControl<GMOSnake>("TestMove")));
+    test_snake_ai.AddBehaviors(std::make_shared<GBSnakeCheckDeath<GMOSnake>>(GBSnakeCheckDeath<GMOSnake>("BasicCheck")));
+    test_snake_ai.AddBehaviors(std::make_shared<GBSnakeCheckFood<GMOSnake>>(GBSnakeCheckFood<GMOSnake>("FoodCheck", &this->foods, occupied)));
+
+    SDL_Log("> Creating Object List <Food>...");
+    srand(static_cast<unsigned int>(time(nullptr)));
+    for (int i = 0; i < 216; ++i) {
+        for (int j = 0; j < 144; ++j) {
+            occupied[i][j] = false;
+        }
+    }
+    for (int i = 0; i < 100; ++i) {
+        int x, y;
+        do {
+            x = (rand() % gridWidth) * 5;
+            y = (rand() % gridHeight) * 5;
+        } while (occupied[x / 5][y / 5]);
+        occupied[x / 5][y / 5] = true;
+        this->foods.push_back(GOFood(x, y));
+    }
 
 	SDL_Log("Pre-initializing Objects...");
-	SDL_Log("> Pre-initializing Object <%s>...", test_snake_ai.GetName().c_str());
-	test_snake_ai.PreInitialize(this->mRenderer);
+    SDL_Log("> Pre-initializing Object List Foods...");
+    for (auto& food : this->foods) {
+        food.PreInitialize(this->mRenderer);
+    }
+    SDL_Log("> Pre-initializing Object <%s>...", test_snake_ai.GetName().c_str());
+    test_snake_ai.PreInitialize(this->mRenderer);
 	return true;
 }
 
@@ -72,8 +95,12 @@ bool Game::Initialize()
 	Mix_Volume(-1, 64);
 	Mix_VolumeMusic(32);
 	SDL_Log("Initializing Objects...");
-	SDL_Log("> Initializing Object <%s>...", test_snake_ai.GetName().c_str());
-	test_snake_ai.InitializeBehaviors();
+    SDL_Log("> Initializing Object List Food...");
+    for (auto& food : this->foods) {
+        food.InitializeBehaviors();
+    }
+    SDL_Log("> Initializing Object <%s>...", test_snake_ai.GetName().c_str());
+    test_snake_ai.InitializeBehaviors();
 	return true;
 }
 
@@ -128,6 +155,9 @@ void Game::GenerateOutput()
 {
 	SDL_SetRenderDrawColor(this->mRenderer, 0, 0, 0, 255);
 	SDL_RenderClear(this->mRenderer);
-	test_snake_ai.UpdateRenderer();
+    for (auto& food : this->foods) {
+        food.UpdateRenderer();
+    }
+    test_snake_ai.UpdateRenderer();
 	SDL_RenderPresent(this->mRenderer);
 }
