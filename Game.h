@@ -2,6 +2,7 @@
 #include "sdl_include.h"
 #include "GObject.h"
 #include "GMOSnake.h"
+#include "GOFood.h"
 
 class Game
 {
@@ -39,5 +40,6 @@ private:
 	bool mIsRunning;
 
 	GMOSnake test_snake_ai;
+    std::vector<GOFood> foods;
 };
 

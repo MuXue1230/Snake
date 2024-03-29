@@ -108,6 +108,7 @@ public:
 		turnPoint.from = this->status.move.direction;
 		turnPoint.runLength = 0;
 		this->status.body.turnPoints.push_back(turnPoint);
+        SDL_Log("[%s] New TurnPoint has been Added: { x: %d, y: %d }", this->GetName().c_str(), turnPoint.pos.x, turnPoint.pos.y);
 	}
 	TurnPoint DeleteLastTurnPoint()
 	{ 
