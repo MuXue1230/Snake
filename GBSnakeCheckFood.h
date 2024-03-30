@@ -7,21 +7,21 @@ class GBSnakeCheckFood :
     public GBehavior<T>
 {
 public:
-    GBSnakeCheckFood(std::vector<GOFood>* foods, bool occupied[216][144]);
-    GBSnakeCheckFood(std::string name, std::vector<GOFood>* foods, bool occupied[216][144]);
+    GBSnakeCheckFood(std::vector<GOFood>* foods, bool occupied[768][432]);
+    GBSnakeCheckFood(std::string name, std::vector<GOFood>* foods, bool occupied[768][432]);
 
     void Initialize() override;
     void UpdateObject() override;
     void HandleEvent(SDL_Event& event) override;
 private:
     std::vector<GOFood>* foods;
-    bool occupied[216][144];
+    bool occupied[768][432];
     const int gridWidth = 216;
     const int gridHeight = 144;
 };
 
 template<class T>
-inline GBSnakeCheckFood<T>::GBSnakeCheckFood(std::vector<GOFood>* foods, bool occupied[216][144])
+inline GBSnakeCheckFood<T>::GBSnakeCheckFood(std::vector<GOFood>* foods, bool occupied[768][432])
     :foods(foods)
 {
     this->SetName("GBSnakeCheckDeath");
@@ -29,12 +29,12 @@ inline GBSnakeCheckFood<T>::GBSnakeCheckFood(std::vector<GOFood>* foods, bool oc
 }
 
 template<class T>
-inline GBSnakeCheckFood<T>::GBSnakeCheckFood(std::string name, std::vector<GOFood>* foods, bool occupied[216][144])
+inline GBSnakeCheckFood<T>::GBSnakeCheckFood(std::string name, std::vector<GOFood>* foods, bool occupied[768][432])
     :foods(foods)
 {
     this->SetName("GBSnakeCheckDeath<" + name + ">");
-    for (int x = 0; x < 216; x++) {
-        for (int y = 0; y < 144; y++) {
+    for (int x = 0; x < 768; x++) {
+        for (int y = 0; y < 432; y++) {
             this->occupied[x][y] = occupied[x][y];
         }
     }
@@ -59,9 +59,10 @@ inline void GBSnakeCheckFood<T>::UpdateObject()
                 a = (rand() % gridWidth) * 5;
                 b = (rand() % gridHeight) * 5;
             } while (this->occupied[a / 5][b / 5]);
-            this->foods->at(index).SetPos(a, b);
-            this->occupied[a / 5][b / 5] = true;
             SDL_Log("[%s->%s] Ate a food: %s", this->GetObject()->GetName().c_str(), this->GetName().c_str(), food.GetName().c_str());
+            this->foods->at(index).SetPos(a, b);
+            this->foods->at(index).SetName("GOFood<x:" + std::to_string(x) + ", y:" + std::to_string(y) + ">");
+            this->occupied[a / 5][b / 5] = true;
         }
         index++;
     }

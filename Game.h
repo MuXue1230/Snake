@@ -45,9 +45,9 @@ private:
 
 	bool mIsRunning;
 
-    const int gridWidth = 216;
-    const int gridHeight = 144;
-    bool occupied[216][144];
+    const int gridWidth = 768;
+    const int gridHeight = 432;
+    bool occupied[768][432];
 
 	GMOSnake test_snake_ai;
     std::vector<GOFood> foods;

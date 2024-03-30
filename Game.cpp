@@ -14,8 +14,8 @@ bool Game::PreInitialize()
 		return false;
 	}
 	SDL_Log("> Creating Window...");
-	SDL_Log("> > Window: \"Snake\", SDL_WINDOWPOS_CENTERED, 1080x720, No Flags");
-	this->mWindow = SDL_CreateWindow("Snake", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1080, 720, 0);
+	SDL_Log("> > Window: \"Snake\", SDL_WINDOWPOS_CENTERED, 3840x2160, SDL_WINDOW_FULLSCREEN");
+	this->mWindow = SDL_CreateWindow("Snake", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 3840, 2160, SDL_WINDOW_FULLSCREEN);
 	if (!this->mWindow) {
 		SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_ERROR, SDL_GetError());
 		return false;
@@ -44,12 +44,12 @@ bool Game::PreInitialize()
 
     SDL_Log("> Creating Object List <Food>...");
     srand(static_cast<unsigned int>(time(nullptr)));
-    for (int i = 0; i < 216; ++i) {
-        for (int j = 0; j < 144; ++j) {
+    for (int i = 0; i < 768; ++i) {
+        for (int j = 0; j < 432; ++j) {
             occupied[i][j] = false;
         }
     }
-    for (int i = 0; i < 100; ++i) {
+    for (int i = 0; i < 1000; ++i) {
         int x, y;
         do {
             x = (rand() % gridWidth) * 5;

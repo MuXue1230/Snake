@@ -40,7 +40,7 @@ inline void GBSnakeMoveBasicExample<T>::Initialize()
 template<class T>
 inline void GBSnakeMoveBasicExample<T>::UpdateObject()
 {
-	if (this->GetObject()->GetStatus().move.direction == Direction::D_EAST && this->GetObject()->GetStatus().pos.x == 1075) {
+	if (this->GetObject()->GetStatus().move.direction == Direction::D_EAST && this->GetObject()->GetStatus().pos.x == 3835) {
 		this->GetObject()->AddBodyTurnPoint();
 		this->GetObject()->SetDirection(Direction::D_NORTH);
 	}
@@ -52,7 +52,7 @@ inline void GBSnakeMoveBasicExample<T>::UpdateObject()
 		this->GetObject()->AddBodyTurnPoint();
 		this->GetObject()->SetDirection(Direction::D_SOUTH);
 	}
-	else if (this->GetObject()->GetStatus().move.direction == Direction::D_SOUTH && this->GetObject()->GetStatus().pos.y == 715) {
+	else if (this->GetObject()->GetStatus().move.direction == Direction::D_SOUTH && this->GetObject()->GetStatus().pos.y == 2155) {
 		this->GetObject()->AddBodyTurnPoint();
 		this->GetObject()->SetDirection(Direction::D_EAST);
 	}

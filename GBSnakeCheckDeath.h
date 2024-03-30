@@ -37,7 +37,7 @@ template<class T>
 inline void GBSnakeCheckDeath<T>::UpdateObject()
 {
     int x = this->GetObject()->GetStatus().pos.x, y = this->GetObject()->GetStatus().pos.y;
-    if (x < 0 || x > 1075 || y < 0 || y > 715) {
+    if (x < 0 || x > 3835 || y < 0 || y > 2155) {
         SDL_Event event;
         event.type = SDL_QUIT;
         SDL_PushEvent(&event);
