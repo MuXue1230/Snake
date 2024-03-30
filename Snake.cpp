@@ -5,9 +5,15 @@
 int main(int args, char** argv)
 {
     Game* game = new Game();
-    if (game->PreInitialize()&&game->Initialize()) {
-        game->RunLoop();
+
+    //if (game->PreInitialize()&&game->Initialize()) {
+    //    game->RunLoop();
+    //}
+    //game->ShutDown();
+
+    if (game->GLPreInitialize()&&game->GLInitialize()) {
+        game->GLRunLoop();
     }
-    game->ShutDown();
+    game->GLShutDown();
     return 0;
 }

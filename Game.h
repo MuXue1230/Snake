@@ -35,13 +35,26 @@ public:
 	bool Initialize();
 	void RunLoop();
 	void ShutDown();
+
+    bool GLPreInitialize();
+    bool GLInitialize();
+    void GLRunLoop();
+    void GLShutDown();
 private:
 	void ProcessesInput();
 	void UpdateGame();
 	void GenerateOutput();
 
+    void GLProcessesInput();
+    void GLUpdateGame();
+    void GLGenerateOutput();
+
+    // SDL
 	SDL_Window* mWindow;
 	SDL_Renderer* mRenderer;
+
+    // OpenGL
+    SDL_GLContext mContext;
 
 	bool mIsRunning;
 
