@@ -58,6 +58,40 @@ void GMOSnake::HandleBehaviorsEvent(SDL_Event event)
 	this->HandleEvent(event);
 }
 
+void GMOSnake::GLPreInitialize(SDL_Renderer* renderer)
+{
+    this->SetRenderer(renderer);
+    for (auto& item : this->GetBehaviors()) {
+        SDL_Log("[With OpenGL]> > Pre-initializing Behavior <%s>...", item->GetName().c_str());
+        item->GLPreInitialize(*this, renderer);
+    }
+}
+
+void GMOSnake::GLInitializeBehaviors()
+{
+    for (auto& item : this->GetBehaviors()) {
+        SDL_Log("[With OpenGL]> > Initializing Behavior <%s>...", item->GetName().c_str());
+        item->GLInitialize();
+    }
+    this->GLInitialize();
+}
+
+void GMOSnake::GLUpdateBehaviors()
+{
+    for (auto& item : this->GetBehaviors()) {
+        item->GLUpdateObject();
+    }
+    this->GLUpdateObject();
+}
+
+void GMOSnake::GLHandleBehaviorsEvent(SDL_Event event)
+{
+    for (auto& item : this->GetBehaviors()) {
+        item->GLHandleEvent(event);
+    }
+    this->GLHandleEvent(event);
+}
+
 void GMOSnake::Initialize()
 {
 	this->SetColor(0, 255, 0, 255);
@@ -129,6 +163,73 @@ void GMOSnake::UpdateRenderer()
 
 		SDL_RenderFillRect(this->GetRenderer(), &bodyPart);
 	}
+
+    for (size_t i = 0; i < this->status.body.turnPoints.size(); ++i) {
+        this->status.body.turnPoints[i].runLength += 1;
+    }
+    if (this->status.body.turnPoints.size() > 0 && this->status.body.turnPoints[0].runLength >= this->status.body.length) {
+        this->DeleteLastTurnPoint();
+    }
+}
+
+void GMOSnake::GLInitialize()
+{
+    this->SetColor(0, 255, 0, 255);
+    this->SetSize(5, 5);
+    this->SetPos(540, 360);
+    this->SetBodyColor(100, 255, 100, 255);
+    this->SetDirection(Direction::D_EAST);
+    this->SetLength(15);
+    this->SetSpeed(5);
+}
+
+void GMOSnake::GLUpdateObject()
+{
+    if (this->GetStatus().move.direction == Direction::D_NORTH) this->MoveUp();
+    else if (this->GetStatus().move.direction == Direction::D_SOUTH) this->MoveDown();
+    else if (this->GetStatus().move.direction == Direction::D_EAST) this->MoveRight();
+    else if (this->GetStatus().move.direction == Direction::D_WEST) this->MoveLeft();
+    this->UpdateObjectExernal();
+}
+
+void GMOSnake::GLUpdateRenderer()
+{
+    snakeHead.w = this->status.size.w;
+    snakeHead.h = this->status.size.h;
+    snakeHead.x = this->status.pos.x;
+    snakeHead.y = this->status.pos.y;
+    // TODO: OPENGL Ready
+    TurnPoint point;
+    point.pos.x = this->status.pos.x;
+    point.pos.y = this->status.pos.y;
+    point.from = this->status.move.direction;
+    int index = 1;
+    size_t t = 0;
+    for (size_t i = 0; i < this->status.body.length; ++i) {
+        // TODO: OPENGL Ready
+        switch (point.from)
+        {
+        case D_SOUTH:
+            // TODO: OPENGL Ready
+            break;
+        case D_NORTH:
+            // TODO: OPENGL Ready
+            break;
+        case D_EAST:
+            // TODO: OPENGL Ready
+            break;
+        case D_WEST:
+            // TODO: OPENGL Ready
+            break;
+        }
+        if (index <= this->status.body.turnPoints.size()) {
+            // TODO: OPENGL Ready
+        }
+
+        t++;
+
+        // TODO: OPENGL Ready
+    }
 
     for (size_t i = 0; i < this->status.body.turnPoints.size(); ++i) {
         this->status.body.turnPoints[i].runLength += 1;

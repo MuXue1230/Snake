@@ -91,7 +91,7 @@
       <SuppressStartupBanner>false</SuppressStartupBanner>
       <LinkStatus>true</LinkStatus>
       <CreateHotPatchableImage>Enabled</CreateHotPatchableImage>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;glew32.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <Manifest>
@@ -137,7 +137,7 @@
       <LinkStatus>true</LinkStatus>
       <CreateHotPatchableImage>
       </CreateHotPatchableImage>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;glew32.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <SetChecksum>true</SetChecksum>
@@ -164,7 +164,6 @@
     <ClCompile Include="GMoveableObject.cpp" />
     <ClCompile Include="GObject.cpp" />
     <ClCompile Include="GOFood.cpp" />
-    <ClCompile Include="GPlayerObject.cpp" />
     <ClCompile Include="Snake.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -178,7 +177,6 @@
     <ClInclude Include="GMoveableObject.h" />
     <ClInclude Include="GObject.h" />
     <ClInclude Include="GOFood.h" />
-    <ClInclude Include="GPlayerObject.h" />
     <ClInclude Include="sdl_include.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

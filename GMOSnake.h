@@ -62,11 +62,22 @@ public:
 	void UpdateBehaviors();
 	void HandleBehaviorsEvent(SDL_Event event);
 
+    void GLPreInitialize(SDL_Renderer* renderer);
+    void GLInitializeBehaviors();
+    void GLUpdateBehaviors();
+    void GLHandleBehaviorsEvent(SDL_Event event);
+
 	void Initialize() override;
 	void UpdateObject() override;
 	// void UpdateObjectExernal() override; // Leave it to Behaviors.
 	// void HandleEvent(SDL_Event event) override; // Leave it to Behaviors.
 	void UpdateRenderer() override;
+
+    void GLInitialize() override;
+    void GLUpdateObject() override;
+    // void GLUpdateObjectExernal() override; // Leave it to Behaviors.
+    // void GLHandleEvent(SDL_Event event) override; // Leave it to Behaviors.
+    void GLUpdateRenderer() override;
 
 
 	void MoveUp() override { this->status.pos.y -= this->status.move.speed; }
@@ -106,7 +117,6 @@ public:
 		turnPoint.from = this->status.move.direction;
 		turnPoint.runLength = 0;
 		this->status.body.turnPoints.push_back(turnPoint);
-        SDL_Log("[%s] New TurnPoint has been Added: { x: %d, y: %d }", this->GetName().c_str(), turnPoint.pos.x, turnPoint.pos.y);
 	}
 	TurnPoint DeleteLastTurnPoint()
 	{ 

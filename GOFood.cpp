@@ -30,3 +30,20 @@ void GOFood::UpdateRenderer()
     food.w = this->GetStatus().size.w;
     SDL_RenderFillRect(this->GetRenderer(), &food);
 }
+
+void GOFood::GLInitialize()
+{
+    this->SetColor(255, 0, 0, 255);
+    this->SetSize(5, 5);
+    //this->SetPos(x, y); // In constructor
+}
+
+void GOFood::GLUpdateObject()
+{
+    // No need for static object
+}
+
+void GOFood::GLUpdateRenderer()
+{
+    // TODO: OPENGL Ready
+}

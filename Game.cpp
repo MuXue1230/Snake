@@ -188,23 +188,23 @@ bool Game::GLPreInitialize()
     }
     glGetError();
 
-    SDL_Log("Pre-drawing Screen...");
-    SDL_Log("> Setting Up Context...");
+    SDL_Log("[With OpenGL]Pre-drawing Screen...");
+    SDL_Log("[With OpenGL]> Setting Up Context...");
     glClearColor(0.0f,0.0f,0.0f,0.0f);
-    SDL_Log("> Cleaning Context...");
+    SDL_Log("[With OpenGL]> Cleaning Context...");
     glClear(GL_COLOR_BUFFER_BIT);
-    SDL_Log("> Drawing Context...");
+    SDL_Log("[With OpenGL]> Drawing Context...");
     SDL_GL_SwapWindow(mWindow);
 
-    SDL_Log("Updating Objects List...");
-    SDL_Log("> Creating Object <Snake<AI_Test1>>...");
+    SDL_Log("[With OpenGL]Updating Objects List...");
+    SDL_Log("[With OpenGL]> Creating Object <Snake<AI_Test1>>...");
     test_snake_ai = GMOSnake("AI_Test1");
     test_snake_ai.AddBehaviors(std::make_shared<GBSnakeMoveBasicExample<GMOSnake>>(GBSnakeMoveBasicExample<GMOSnake>("SideMove")));
     test_snake_ai.AddBehaviors(std::make_shared<GBSnakeMoveUserControl<GMOSnake>>(GBSnakeMoveUserControl<GMOSnake>("TestMove")));
     test_snake_ai.AddBehaviors(std::make_shared<GBSnakeCheckDeath<GMOSnake>>(GBSnakeCheckDeath<GMOSnake>("BasicCheck")));
     test_snake_ai.AddBehaviors(std::make_shared<GBSnakeCheckFood<GMOSnake>>(GBSnakeCheckFood<GMOSnake>("FoodCheck", &this->foods, occupied)));
 
-    SDL_Log("> Creating Object List <Food>...");
+    SDL_Log("[With OpenGL]> Creating Object List <Food>...");
     srand(static_cast<unsigned int>(time(nullptr)));
     for (int i = 0; i < 768; ++i) {
         for (int j = 0; j < 432; ++j) {
@@ -221,20 +221,26 @@ bool Game::GLPreInitialize()
         this->foods.push_back(GOFood(x, y));
     }
 
-    SDL_Log("Pre-initializing Objects...");
-    SDL_Log("> Pre-initializing Object List Foods...");
+    SDL_Log("[With OpenGL]Pre-initializing Objects...");
+    SDL_Log("[With OpenGL]> Pre-initializing Object List Foods...");
     for (auto& food : this->foods) {
-        food.PreInitialize(this->mRenderer);
+        food.GLPreInitialize(this->mRenderer);
     }
-    SDL_Log("> Pre-initializing Object <%s>...", test_snake_ai.GetName().c_str());
-    test_snake_ai.PreInitialize(this->mRenderer);
+    SDL_Log("[With OpenGL]> Pre-initializing Object <%s>...", test_snake_ai.GetName().c_str());
+    test_snake_ai.GLPreInitialize(this->mRenderer);
     return true;
 }
 
 bool Game::GLInitialize()
 {
     SDL_Log("[With OpenGL]Initializing Game...");
-    // TODO: OPENGL Ready
+    SDL_Log("[With OpenGL]Initializing Objects...");
+    SDL_Log("[With OpenGL]> Initializing Object List Food...");
+    for (auto& food : this->foods) {
+        food.GLInitializeBehaviors();
+    }
+    SDL_Log("[With OpenGL]> Initializing Object <%s>...", test_snake_ai.GetName().c_str());
+    test_snake_ai.GLInitializeBehaviors();
     return true;
 }
 
@@ -249,8 +255,9 @@ void Game::GLRunLoop()
 
 void Game::GLShutDown()
 {
-    // TODO: OPENGL Ready
     SDL_Log("[With OpenGL]Shutting Down Game...");
+    SDL_Log("[With OpenGL]> Doing Destruction of Context...");
+    SDL_GL_DeleteContext(this->mContext);
     SDL_Log("[With OpenGL]> Doing Destruction of Window...");
     SDL_DestroyWindow(this->mWindow);
     SDL_Log("[With OpenGL]> Closing SDL...");
@@ -297,19 +304,22 @@ void Game::GLProcessesInput()
             this->mIsRunning = false;
             break;
         }
-        test_snake_ai.HandleBehaviorsEvent(event);
+        test_snake_ai.GLHandleBehaviorsEvent(event);
     }
 }
 
 void Game::GLUpdateGame()
 {
-    test_snake_ai.UpdateBehaviors();
+    test_snake_ai.GLUpdateBehaviors();
 }
 
 void Game::GLGenerateOutput()
 {
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT);
-    // TODO: OPENGL Ready
+    for (auto& food : this->foods) {
+        food.GLUpdateRenderer();
+    }
+    test_snake_ai.GLUpdateRenderer();
     SDL_GL_SwapWindow(mWindow);
 }

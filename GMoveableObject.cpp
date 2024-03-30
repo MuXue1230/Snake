@@ -29,3 +29,12 @@ void GMoveableObject::UpdateObject()
 	else if (this->GetStatus().move.direction == Direction::D_WEST) this->MoveLeft();
 	this->UpdateObjectExernal();
 }
+
+void GMoveableObject::GLUpdateObject()
+{
+    if (this->GetStatus().move.direction == Direction::D_NORTH) this->MoveUp();
+    else if (this->GetStatus().move.direction == Direction::D_SOUTH) this->MoveDown();
+    else if (this->GetStatus().move.direction == Direction::D_EAST) this->MoveRight();
+    else if (this->GetStatus().move.direction == Direction::D_WEST) this->MoveLeft();
+    this->UpdateObjectExernal();
+}

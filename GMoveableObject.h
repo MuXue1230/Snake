@@ -47,7 +47,10 @@ public:
 
 	void UpdateObject() override;
 
-	virtual void UpdateObjectExernal() {}
+    void GLUpdateObject() override;
+
+    virtual void UpdateObjectExernal() {}
+    virtual void GLUpdateObjectExernal() {}
 	virtual void MoveUp() { this->status.pos.y += this->status.move.speed; }
 	virtual void MoveDown() { this->status.pos.y -= this->status.move.speed; }
 	virtual void MoveLeft() { this->status.pos.x -= this->status.move.speed; }

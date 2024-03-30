@@ -1,19 +1,31 @@
 ﻿#include "sdl_include.h"
-
 #include "Game.h"
+
+enum GameEngin {
+    SDL=0,
+    OpenGL
+};
 
 int main(int args, char** argv)
 {
     Game* game = new Game();
 
-    //if (game->PreInitialize()&&game->Initialize()) {
-    //    game->RunLoop();
-    //}
-    //game->ShutDown();
+    GameEngin engin = OpenGL;
 
-    if (game->GLPreInitialize()&&game->GLInitialize()) {
-        game->GLRunLoop();
+    switch (engin)
+    {
+    case SDL:
+        if (game->PreInitialize() && game->Initialize()) {
+            game->RunLoop();
+        }
+        game->ShutDown();
+        break;
+    case OpenGL:
+        if (game->GLPreInitialize() && game->GLInitialize()) {
+            game->GLRunLoop();
+        }
+        game->GLShutDown();
+        break;
     }
-    game->GLShutDown();
     return 0;
 }

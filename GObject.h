@@ -39,15 +39,26 @@ public:
 	void UpdateBehaviors();
 	void HandleBehaviorsEvent(SDL_Event event);
 
+    void GLPreInitialize(SDL_GLContext context);
+    void GLInitializeBehaviors();
+    void GLUpdateBehaviors();
+    void GLHandleBehaviorsEvent(SDL_Event event);
+
 	virtual void Initialize() {}
 	virtual void UpdateObject() {}
 	virtual void HandleEvent(SDL_Event event) {}
 	virtual void UpdateRenderer() {}
 
+    virtual void GLInitialize() {}
+    virtual void GLUpdateObject() {}
+    virtual void GLHandleEvent(SDL_Event event) {}
+    virtual void GLUpdateRenderer() {}
+
 	// Getter & Setter
 	std::string GetName() const { return this->name; }
 	GObjectStatus GetStatus() const { return this->status; }
-	SDL_Renderer* GetRenderer() const { return this->renderer; }
+    SDL_Renderer* GetRenderer() const { return this->renderer; }
+    SDL_GLContext GetContext() const { return this->context; }
 	std::vector<std::shared_ptr<GBehavior<GObject>>> GetBehaviors() const { return this->behaviors; }
 	void SetName(std::string name)
 	{
@@ -77,5 +88,6 @@ private:
 	GObjectStatus status;
 	std::vector<std::shared_ptr<GBehavior<GObject>>> behaviors;
 	SDL_Renderer* renderer;
+    SDL_GLContext context;
 };
 
