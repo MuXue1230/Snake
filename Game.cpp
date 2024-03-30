@@ -58,6 +58,25 @@ bool Game::PreInitialize()
         this->foods.push_back(GOFood(x, y));
     }
 
+    SDL_Log("> Creating Object List <Food>...");
+    srand(static_cast<unsigned int>(time(nullptr)));
+    bool occupied[216][144];
+    for (int i = 0; i < 216; ++i) {
+        for (int j = 0; j < 144; ++j) {
+            occupied[i][j] = false;
+        }
+    }
+    const int gridWidth = 216;
+    const int gridHeight = 144;
+    for (int i = 0; i < 100; ++i) {
+        int x, y;
+        do {
+            x = (rand() % gridWidth) * 5;   // Random x coordinate (multiple of 5)
+            y = (rand() % gridHeight) * 5;  // Random y coordinate (multiple of 5)
+        } while (occupied[x / 5][y / 5]);
+        this->foods.push_back(GOFood(x, y));     // Add food to the vector
+    }
+
 	SDL_Log("Pre-initializing Objects...");
     SDL_Log("> Pre-initializing Object List Foods...");
     for (auto& food : this->foods) {
