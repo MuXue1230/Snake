@@ -71,10 +71,10 @@ bool Game::PreInitialize()
     for (int i = 0; i < 100; ++i) {
         int x, y;
         do {
-            x = (rand() % gridWidth) * 5;   // Random x coordinate (multiple of 5)
-            y = (rand() % gridHeight) * 5;  // Random y coordinate (multiple of 5)
+            x = (rand() % gridWidth) * 5;
+            y = (rand() % gridHeight) * 5;
         } while (occupied[x / 5][y / 5]);
-        this->foods.push_back(GOFood(x, y));     // Add food to the vector
+        this->foods.push_back(GOFood(x, y));
     }
 
 	SDL_Log("Pre-initializing Objects...");
@@ -234,6 +234,8 @@ bool Game::GLPreInitialize()
 bool Game::GLInitialize()
 {
     SDL_Log("[With OpenGL]Initializing Game...");
+    SDL_Log("[With OpenGL]Initializing Shaders...");
+    this->mActorShader = new Shader();
     SDL_Log("[With OpenGL]Initializing Objects...");
     SDL_Log("[With OpenGL]> Initializing Object List Food...");
     for (auto& food : this->foods) {
@@ -241,6 +243,23 @@ bool Game::GLInitialize()
     }
     SDL_Log("[With OpenGL]> Initializing Object <%s>...", test_snake_ai.GetName().c_str());
     test_snake_ai.GLInitializeBehaviors();
+    SDL_Log("[With OpenGL]Loading Shaders");
+    if (!this->mActorShader->Load("BasicVertex.glsl", "BasicPixel.glsl")) {
+        return false;
+    }
+    this->mActorShader->SetActive();
+    // test
+    float vertices[] = {
+        -0.5f,  0.5f,  0.0f,
+         0.5f,  0.5f,  0.0f,
+         0.5f, -0.5f,  0.0f,
+        -0.5f, -0.5f,  0.0f,
+    };
+    unsigned int indices[] = {
+        0, 1, 2,
+        2, 1, 0
+    };
+    mObjectVerts = new VertexArray(vertices, 4, indices, 6);
     return true;
 }
 

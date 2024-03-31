@@ -31,6 +31,12 @@
     <Filter Include="源文件\Snake\Behaviors">
       <UniqueIdentifier>{acd48bd8-071b-4c9a-aa58-2283192d3736}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\GLSupport">
+      <UniqueIdentifier>{b225828a-906a-474a-bf6d-f1809ca330a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\GLSupport">
+      <UniqueIdentifier>{2445a4cd-bcab-40d2-accc-42f7131d10ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Snake.cpp">
@@ -46,9 +52,6 @@
       <Filter>源文件\Basic</Filter>
     </ClCompile>
     <ClCompile Include="GObject.cpp">
-      <Filter>源文件\Basic</Filter>
-    </ClCompile>
-    <ClCompile Include="GPlayerObject.cpp">
       <Filter>源文件\Basic</Filter>
     </ClCompile>
     <ClCompile Include="GMOSnake.cpp">
@@ -69,6 +72,15 @@
     <ClCompile Include="GBSnakeCheckFood.cpp">
       <Filter>源文件\Snake\Behaviors</Filter>
     </ClCompile>
+    <ClCompile Include="VertexArray.cpp">
+      <Filter>源文件\GLSupport</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>源文件\GLSupport</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>源文件\GLSupport</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sdl_include.h">
@@ -81,9 +93,6 @@
       <Filter>头文件\Basic</Filter>
     </ClInclude>
     <ClInclude Include="GObject.h">
-      <Filter>头文件\Basic</Filter>
-    </ClInclude>
-    <ClInclude Include="GPlayerObject.h">
       <Filter>头文件\Basic</Filter>
     </ClInclude>
     <ClInclude Include="GBehavior.h">
@@ -106,6 +115,15 @@
     </ClInclude>
     <ClInclude Include="GBSnakeCheckFood.h">
       <Filter>头文件\Snake\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexArray.h">
+      <Filter>头文件\GLSupport</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>头文件\GLSupport</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>头文件\GLSupport</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

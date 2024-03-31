@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -164,7 +164,10 @@
     <ClCompile Include="GMoveableObject.cpp" />
     <ClCompile Include="GObject.cpp" />
     <ClCompile Include="GOFood.cpp" />
+    <ClCompile Include="Math.cpp" />
+    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Snake.cpp" />
+    <ClCompile Include="VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -177,7 +180,10 @@
     <ClInclude Include="GMoveableObject.h" />
     <ClInclude Include="GObject.h" />
     <ClInclude Include="GOFood.h" />
+    <ClInclude Include="Math.h" />
     <ClInclude Include="sdl_include.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="VertexArray.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

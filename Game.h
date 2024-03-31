@@ -3,6 +3,8 @@
 #include "GObject.h"
 #include "GMOSnake.h"
 #include "GOFood.h"
+#include "VertexArray.h"
+#include "Shader.h"
 
 #include "GBSnakeCheckDeath.h"
 #include "GBSnakeCheckFood.h"
@@ -55,6 +57,8 @@ private:
 
     // OpenGL
     SDL_GLContext mContext;
+    VertexArray* mObjectVerts;
+    Shader* mActorShader;
 
 	bool mIsRunning;
 

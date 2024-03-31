@@ -16,5 +16,7 @@
 #include <memory>
 #include <cstdlib>
 #include <ctime>
+#include <fstream>
+#include <sstream>
 
 #endif
