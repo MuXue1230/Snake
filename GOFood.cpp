@@ -43,7 +43,17 @@ void GOFood::GLUpdateObject()
     // No need for static object
 }
 
-void GOFood::GLUpdateRenderer()
+void GOFood::GLUpdateRenderer(Shader* shader)
 {
-    // TODO: OPENGL Ready
+    SDL_Rect food;
+    food.x = this->GetStatus().pos.x;
+    food.y = this->GetStatus().pos.y;
+    food.h = this->GetStatus().size.h;
+    food.w = this->GetStatus().size.w;
+
+    this->worldTransform = Matrix4::CreateScale(5.0f);
+    this->worldTransform *= Matrix4::CreateTranslation(Vector3(food.x - 1920, 1080 - food.y, 0.0f));
+    shader->SetMatrixUniform("worldTransform", this->worldTransform);
+    shader->SetIntUniform("colorId", 2);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 }

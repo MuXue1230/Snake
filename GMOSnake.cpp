@@ -192,13 +192,18 @@ void GMOSnake::GLUpdateObject()
     this->UpdateObjectExernal();
 }
 
-void GMOSnake::GLUpdateRenderer()
+void GMOSnake::GLUpdateRenderer(Shader* shader)
 {
     snakeHead.w = this->status.size.w;
     snakeHead.h = this->status.size.h;
     snakeHead.x = this->status.pos.x;
     snakeHead.y = this->status.pos.y;
-    // TODO: OPENGL Ready
+    this->worldTransform = Matrix4::CreateScale(5.0f);
+    this->worldTransform *= Matrix4::CreateTranslation(Vector3(snakeHead.x - 1920, 1080 - snakeHead.y, 0.0f));
+    shader->SetMatrixUniform("worldTransform", this->worldTransform);
+    shader->SetIntUniform("colorId", 0);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+
     TurnPoint point;
     point.pos.x = this->status.pos.x;
     point.pos.y = this->status.pos.y;
@@ -206,29 +211,43 @@ void GMOSnake::GLUpdateRenderer()
     int index = 1;
     size_t t = 0;
     for (size_t i = 0; i < this->status.body.length; ++i) {
-        // TODO: OPENGL Ready
+        SDL_Rect bodyPart;
+        bodyPart.w = this->status.size.w;
+        bodyPart.h = this->status.size.h;
         switch (point.from)
         {
         case D_SOUTH:
-            // TODO: OPENGL Ready
+            bodyPart.x = point.pos.x;
+            bodyPart.y = point.pos.y - t * this->status.size.h;
             break;
         case D_NORTH:
-            // TODO: OPENGL Ready
+            bodyPart.x = point.pos.x;
+            bodyPart.y = point.pos.y + t * this->status.size.h;
             break;
         case D_EAST:
-            // TODO: OPENGL Ready
+            bodyPart.x = point.pos.x - t * this->status.size.w;
+            bodyPart.y = point.pos.y;
             break;
         case D_WEST:
-            // TODO: OPENGL Ready
+            bodyPart.x = point.pos.x + t * this->status.size.w;
+            bodyPart.y = point.pos.y;
             break;
         }
         if (index <= this->status.body.turnPoints.size()) {
-            // TODO: OPENGL Ready
+            if (this->status.body.turnPoints[this->status.body.turnPoints.size() - index].pos.x == bodyPart.x && this->status.body.turnPoints[this->status.body.turnPoints.size() - index].pos.y == bodyPart.y) {
+                point = this->status.body.turnPoints[this->status.body.turnPoints.size() - index];
+                index += 1;
+                t = 0;
+            }
         }
 
         t++;
 
-        // TODO: OPENGL Ready
+        Matrix4 bodyTransform = Matrix4::CreateScale(5.0f);
+        bodyTransform *= Matrix4::CreateTranslation(Vector3(bodyPart.x - 1920, 1080 - bodyPart.y, 0.0f));
+        shader->SetMatrixUniform("worldTransform", bodyTransform);
+        shader->SetIntUniform("colorId", 1);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
     }
 
     for (size_t i = 0; i < this->status.body.turnPoints.size(); ++i) {

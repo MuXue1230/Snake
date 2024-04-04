@@ -17,8 +17,8 @@ public:
     void GLUpdateObject() override;
     // void GLUpdateObject() override; // No need for static object.
     // void GLHandleEvent(SDL_Event event) override; // No need for static object.
-    void GLUpdateRenderer() override;
+    void GLUpdateRenderer(Shader* shader) override;
 private:
-    bool ate = false;
+    Matrix4 worldTransform;
 };
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "sdl_include.h"
 #include "GBehavior.h"
+#include "Shader.h"
 
 struct GObjectStatus
 {
@@ -52,7 +53,7 @@ public:
     virtual void GLInitialize() {}
     virtual void GLUpdateObject() {}
     virtual void GLHandleEvent(SDL_Event event) {}
-    virtual void GLUpdateRenderer() {}
+    virtual void GLUpdateRenderer(Shader* shader) {}
 
 	// Getter & Setter
 	std::string GetName() const { return this->name; }

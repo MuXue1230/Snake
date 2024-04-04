@@ -3,6 +3,8 @@
 #ifndef INCLUDED
 #define INCLUDED
 
+#include "Math.h"
+
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>

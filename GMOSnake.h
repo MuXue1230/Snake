@@ -77,7 +77,7 @@ public:
     void GLUpdateObject() override;
     // void GLUpdateObjectExernal() override; // Leave it to Behaviors.
     // void GLHandleEvent(SDL_Event event) override; // Leave it to Behaviors.
-    void GLUpdateRenderer() override;
+    void GLUpdateRenderer(Shader* shader) override;
 
 
 	void MoveUp() override { this->status.pos.y -= this->status.move.speed; }
@@ -134,6 +134,6 @@ private:
 	GMOSnakeStatus status;
 	std::vector<std::shared_ptr<GBehavior<GMOSnake>>> behaviors;
 	SDL_Rect snakeHead;
-	std::vector<SDL_Rect> snakeBodies;
+    Matrix4 worldTransform;
 };
 

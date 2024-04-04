@@ -244,11 +244,15 @@ bool Game::GLInitialize()
     SDL_Log("[With OpenGL]> Initializing Object <%s>...", test_snake_ai.GetName().c_str());
     test_snake_ai.GLInitializeBehaviors();
     SDL_Log("[With OpenGL]Loading Shaders");
-    if (!this->mActorShader->Load("BasicVertex.glsl", "BasicPixel.glsl")) {
+    if (!this->mActorShader->Load("TransformVertex.glsl", "TransformPixel.glsl")) {
         return false;
     }
+    SDL_Log("[With OpenGL]Activing Shaders");
     this->mActorShader->SetActive();
-    // test
+    SDL_Log("[With OpenGL]Creating ViewPorject");
+    Matrix4 viewProj = Matrix4::CreateSimpleViewProj(3840.0f, 2160.0f);
+    this->mActorShader->SetMatrixUniform("viewProj", viewProj);
+    SDL_Log("[With OpenGL]Setting Vertices and Indices");
     float vertices[] = {
         -0.5f,  0.5f,  0.0f,
          0.5f,  0.5f,  0.0f,
@@ -257,7 +261,7 @@ bool Game::GLInitialize()
     };
     unsigned int indices[] = {
         0, 1, 2,
-        2, 1, 0
+        2, 3, 0
     };
     mObjectVerts = new VertexArray(vertices, 4, indices, 6);
     return true;
@@ -275,6 +279,8 @@ void Game::GLRunLoop()
 void Game::GLShutDown()
 {
     SDL_Log("[With OpenGL]Shutting Down Game...");
+    SDL_Log("[With OpenGL]> Unloading Shaders...");
+    this->mActorShader->Unload();
     SDL_Log("[With OpenGL]> Doing Destruction of Context...");
     SDL_GL_DeleteContext(this->mContext);
     SDL_Log("[With OpenGL]> Doing Destruction of Window...");
@@ -336,9 +342,11 @@ void Game::GLGenerateOutput()
 {
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT);
+    this->mActorShader->SetActive();
+    this->mObjectVerts->SetActive();
     for (auto& food : this->foods) {
-        food.GLUpdateRenderer();
+        food.GLUpdateRenderer(this->mActorShader);
     }
-    test_snake_ai.GLUpdateRenderer();
+    test_snake_ai.GLUpdateRenderer(this->mActorShader);
     SDL_GL_SwapWindow(mWindow);
 }
